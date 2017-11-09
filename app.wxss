@@ -1,0 +1,56 @@
+/**app.wxss**/
+page{
+  height: 100%;
+  background: #f2f2f2;
+  font-family: 'Microsoft YaHei';
+  font-size: 14px;
+  line-height: 1.42857143;
+}
+.container{
+  height: 100%;
+}
+
+audio{
+   display: none;      
+}
+
+.audio_music{
+  animation: rotating 1.2s linear infinite;
+}
+
+checkbox {
+  float: right;
+}
+
+@font-face {
+	font-family: 'iconfont';
+  src: url('data:application/x-font-woff;charset=utf-8;base64,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') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+.iconfont {
+  font-family:"iconfont" !important;
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-shanchu:before { content: "\e641"; }
+
+.icon-shanchu1:before { content: "\e64d"; }
+
+.icon-templet:before { content: "\e606"; }
+
+.icon-yinyue:before { content: "\e680"; }
+
+.icon-fabu:before { content: "\e688"; }
+
+.icon-kan:before { content: "\e607"; }
+
+.icon-bianji:before { content: "\e517"; }
+
+
+wrapper wx-view {
+  background-size:100% 100%;
+}

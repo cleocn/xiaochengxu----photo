@@ -1,0 +1,102 @@
+/* user.wxss */
+.container{
+  background: #f2f2f2;
+}
+.user-header{
+  height: 300rpx;
+  position: relative
+}
+.user-header image.user-header-bg{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 0;
+}
+.user-header .user-header-info{
+  position: absolute;
+  left: 40rpx;
+  bottom: 30rpx;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+}
+.user-header .user-header-info image.user-header-img{
+  width:140rpx;
+  height:140rpx;
+  /* border: 5px solid #fff; */
+  border-radius: 50%;
+}
+.user-header .user-header-info .user-header-name{
+  padding-left: 40rpx;
+  font-size: 1rem;
+  color: #fff; 
+}
+.user-content{
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+.user-content .user-album-list{
+  background: #fff;
+  display: flex;
+  /* justify-content: space-between; */
+  padding: 24rpx;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+.user-content .user-album-list image{
+  width: 240rpx;
+  height: 240rpx;
+  border-radius: 10px;
+  margin-right: 10px;
+}
+.user-content .user-album-list .user-album-list-r{
+  flex: 2;
+}
+.user-content .user-album-list .user-album-list-r view{
+  padding-top: 20rpx;
+  font-size: 12px;
+}
+.user-content .user-album-list .user-album-list-r view text{
+  font-size: 1em;  
+  color: #b4b4b4;
+}
+.user-content .user-album-list .user-album-list-r view:first-child text{
+  font-weight: 700;
+  color: #000;
+}
+ .user-content .user-album-list .user-album-list-r view:nth-child(2){
+  display: flex;
+  justify-content: space-between;
+} 
+.user-content .user-album-list .user-album-list-r view:nth-child(3){
+  display: flex;
+  justify-content: space-between;
+}
+ .user-content .user-album-list .user-album-list-r view:nth-child(3) text:nth-child(3){
+  padding-left: 60rpx;
+}  
+
+.make-new{
+  color: #fff;
+  background-color: #ff6765;
+}
+
+.concat{
+  position: absolute;
+  right: 10px;
+  top: 20px;
+  background: #ff6765;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  line-height: 50px;
+  text-align: center;
+}
+
+.tip{
+  text-align: center;
+  color: #b4b4b4;
+  margin-top: 10px;
+}

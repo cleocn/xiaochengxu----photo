@@ -1,0 +1,51 @@
+<!--pages/edit/edit.wxml-->
+<import src="../../template/swiperview/swiperview.wxml" />
+<view class='container'>
+  <view class="swiper-view" wx:if="{{activeIndex == 1}}">
+    <audio src="{{bgmusic}}" id="myAudio" bindplay="play" bindpause="pause" loop></audio>
+    <swiper indicator-dots vertical duration="1000" indicator-color="#fff" indicator-active-color="rgb(128, 243, 247)" current="{{current}}" bindchange="change">   
+      <template is="swiperview" data="{{swiper}}" />
+    </swiper>
+  </view>
+  <view class="list-item" wx:if="{{activeIndex == 2}}">
+    <checkbox-group bindchange="checkboxChange">
+      <view class="list-content">
+          <block wx:for="{{mubanData}}" wx:key>
+            <view class="list-content-l">
+              <checkbox value="{{item.pageid}}" checked="{{item.checked}}"/>
+              <view bindtap="show" data-pageid="{{item.pageid}}">
+                <image src="{{item.bg}}"></image>
+                <view><text>{{item.text}}</text></view>
+              </view>
+            </view>
+          </block>
+      </view>
+    </checkbox-group>
+    <view class="tip">敬请期待更多模板...</view> 
+    <view class="save hide">
+      <button bindtap="chooseActive" data-index="4">关闭</button>
+    </view>
+  </view>
+  <view class="list-item" wx:if="{{activeIndex == 3}}">
+    <scroll-view>
+      <view class="list-content">
+        <radio-group bindchange="radioChange">
+          <label class="list-content-m" wx:for="{{musicData}}" wx:key>
+            <radio value="{{item.src}}" checked="{{checkMusic == item.src}}" />{{item.name}}
+          </label>
+        </radio-group>
+      </view>
+    </scroll-view>
+    <view class="save hide">
+      <button bindtap="chooseActive" data-index="1">关闭</button>
+    </view>
+  </view>
+  <view class="list-item opacity" wx:if="{{activeIndex == 5}}">
+    <view>
+      <text>标题</text>
+      <input bindinput="saveTitle" auto-focus/>
+      <button bindtap="chooseActive" data-index="5">保存</button>
+    </view>
+  </view>
+</view>   
+

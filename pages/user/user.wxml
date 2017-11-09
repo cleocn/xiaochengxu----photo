@@ -1,0 +1,29 @@
+<!--user.wxml-->
+<view class="container">
+  <view class="user-header">
+    <image src="http://ac-uslk0bln.clouddn.com/8fdde8075c2f4bd127d5.png" class="user-header-bg"></image>
+    <view class="user-header-info">
+        <image src="{{userInfo.avatar}}" class="user-header-img" wx:if="{{userInfo.avatar}}"></image>  
+        <view class="user-header-name"><text>{{userInfo.nickname}}</text></view>
+    </view>
+    <view class="concat"><contact-button type="default-light" size="20" session-from="weapp" type="default-light"></contact-button></view>
+  </view>
+  <view class="user-content">
+    <block wx:for="{{photos}}" wx:key>
+      <view class="user-album-list">
+        <image src="{{item.thumb}}" style="background-color:#eee"></image>
+        <view class="user-album-list-r"> 
+          <view><text>{{item.title ? item.title: '小琬琬音乐相册'}}</text></view>
+          <view><text>浏览量：{{item.view}}</text><text>分享次数：{{item.share}}</text></view>
+          <view>
+              <text class="iconfont icon-shanchu1" data-id="{{item.id}}" bindtap="del">删除</text>
+              <text class="iconfont icon-bianji" data-id="{{item.id}}" bindtap="edit">编辑</text>
+              <text class="iconfont icon-kan" data-id="{{item.id}}" bindtap="open">打开</text>
+          </view>
+        </view>
+      </view>
+    </block>
+    <button bindtap="create" class="make-new">制作新相册</button>
+    <!-- <view class="tip">由于使用第三方免费服务，操作会稍有延迟...</view> -->
+  </view>
+</view>

@@ -1,0 +1,3 @@
+/* pages/edit/edit.wxss */
+
+@import '../../template/swiperview/swiperview.wxss';

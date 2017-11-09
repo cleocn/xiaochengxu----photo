@@ -1,0 +1,32 @@
+/* pages/edit/edit.wxss */
+
+@import '../../template/swiperview/swiperview.wxss';
+
+
+.list-item.opacity{
+  background: rgba(0,0,0,.5);
+  position: relative;
+}
+.list-item.opacity view{
+  width: 500rpx;
+  height: 310rpx;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -250rpx;
+  margin-top: -155rpx;
+  border-radius: 5px;
+  background: #fff;
+  text-align: center;
+}
+.list-item.opacity view text{
+  font-size: 16px;
+  height: 40px;
+  line-height: 40px;
+  margin-bottom: 10px;
+}
+.list-item.opacity view input{
+  border: 1px solid #eee;
+  height: 40px;
+  margin-bottom: 30rpx;
+}

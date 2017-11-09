@@ -1,0 +1,21 @@
+<!--index.wxml-->
+
+<view class='container'>
+  <audio src="{{bgmusic}}" id="myAudio" bindplay="play" bindpause="pause" loop></audio>
+  <swiper indicator-dots vertical autoplay circular duration="1000" indicator-color="#fff" indicator-active-color="rgb(128, 243, 247)" bindchange="change">
+      <block wx:for="{{swiper}}" wx:for-item="swiperItem" wx:key>
+        <swiper-item>
+            <view class="wrapper" style="background: url({{swiperItem.bg}});">
+              <block wx:for="{{swiperItem.list}}" wx:key>
+                  <view wx:if="{{item.parentStyle}}" style="{{item.parentStyle}}">
+                    <view wx:if="{{item.style}}" style="{{item.style}}" bindtap="{{item.bindTap ? item.bindTap : ''}}" class="{{!audioState ? item.class : ''}}"></view>
+                  </view>
+              </block>
+            </view> 
+            <view class="save" catchtap="make" wx:if="{{share}}">
+              我也要制作一个
+            </view>
+        </swiper-item>
+      </block>
+  </swiper>
+</view>   

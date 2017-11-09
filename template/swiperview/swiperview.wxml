@@ -1,0 +1,21 @@
+
+<template name="swiperview">
+  <block wx:for="{{swiper}}" wx:for-item="swiperItem" wx:for-index="idx" wx:key>
+    <swiper-item>
+        <view class="wrapper" style="background: url({{swiperItem.bg}});">
+          <block wx:for="{{swiperItem.list}}" wx:key>
+              <view wx:if="{{item.parentStyle}}" style="{{item.parentStyle}}" bindtap="chooseImg" data-idx="{{idx}}" data-index="{{index}}">
+                <view wx:if="{{item.style}}" style="{{item.style}}" catchtap="{{item.bindTap ? item.bindTap : ''}}" class="{{!audioState ? item.class : ''}}"></view>
+              </view>
+          </block>
+        </view> 
+        <view class="imageTip">由于使用第三方免费服务，上传图片会稍有延迟...</view>
+        <view class="save">
+          <view bindtap="del" data-idx="{{idx}}"><text class="iconfont icon-shanchu1"></text>删除本页</view>   
+          <view bindtap="chooseActive" data-index="2"><text class="iconfont icon-templet"></text>模板</view>
+          <view bindtap="chooseActive" data-index="3"><text class="iconfont icon-yinyue"></text>音乐</view>
+          <view bindtap="save"><text class="iconfont icon-fabu"></text>保存</view>
+        </view>
+    </swiper-item>
+  </block>
+</template>

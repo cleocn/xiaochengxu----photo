@@ -1,0 +1,16 @@
+<!--pages/show.wxml-->
+<view class='container'>
+  <swiper vertical>
+      <block wx:for="{{swiper}}" wx:for-item="swiperItem" wx:key>
+        <swiper-item>
+            <view class="wrapper" style="background: url({{swiperItem.bg}});">
+              <block wx:for="{{swiperItem.list}}" wx:key>
+                <view wx:if="{{item.parentStyle}}" style="{{item.parentStyle}}">
+                  <view wx:if="{{item.style}}" style="{{item.style}}" bindtap="{{item.bindTap ? item.bindTap : ''}}" class="{{!audioState ? item.class : ''}}"></view>
+                </view>
+              </block>
+            </view> 
+        </swiper-item>
+      </block>
+  </swiper>
+</view>   
