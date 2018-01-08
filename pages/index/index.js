@@ -28,7 +28,7 @@ Page({
     UserService.userView(this.id);
     wx.removeStorageSync('indexCurrentIndex');
   },
-  onReady: function(){
+  onReady: function () {
     this._loadTpl();
     this.audioCtx = wx.createAudioContext('myAudio');
     this.audioCtx.play();

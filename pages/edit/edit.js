@@ -128,7 +128,6 @@ Page({
           mubanData: res
         })
       });
-
     } else if (index == 3){
       ListService.getMusicData(res => {
         _this.setData({
@@ -139,22 +138,24 @@ Page({
       var swiper = this.data.swiper;
       var swiperData = this.data.swiperData;
       var h5 = new H5();
-      DetailService.getPageData(this.data.checks, res => {
-        res.forEach(function (item, index) {
-          if (item.isPage) {
-            h5.addPage(item)
-          } else {
-            h5.addComponent(item,false)
-          }
+      if (this.data.checks.length){
+        DetailService.getPageData(this.data.checks, res => {
+          res.forEach(function (item, index) {
+            if (item.isPage) {
+              h5.addPage(item)
+            } else {
+              h5.addComponent(item, false)
+            }
+          })
+          // swiper.push.apply(swiper, h5.page)
+          swiperData.push.apply(swiperData, h5.page)
+          _this.setData({
+            swiper: swiperData,
+            changeIndex: false,
+            swiperData
+          })
         })
-        // swiper.push.apply(swiper, h5.page)
-        swiperData.push.apply(swiperData, h5.page)
-        _this.setData({
-          swiper: swiperData,
-          changeIndex: false,
-          swiperData
-        })
-      })
+      }
       index = 1;
     } 
     this.setData({

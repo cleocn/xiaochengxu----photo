@@ -8,12 +8,12 @@ AV.init({
 
 App({
   // onShow: function(){
-  //   var that = this;
-  //   var query = new AV.Query('Config');
-  //   query.get('59fffbf426a9130067db1ee0').then(function (res) {
-  //     that.globalData.config = res._serverData
-  //     console.log(that.globalData.config)
-  //   });
+  //   var userInfo = wx.getStorageSync('userInfo');
+  //   console.log(userInfo, 888)
+  //   if (!userInfo){
+  //     this.userLogin(); 
+  //     return
+  //   }
   // },
   userLogin: function (cb) {
     var that = this
@@ -25,7 +25,7 @@ App({
         success: (res) => {
           var code = res.code;
           that.globalData.code = code
-          that.getUserInfo()
+          // that.getUserInfo()
         }
       })
     }
@@ -69,12 +69,41 @@ App({
                 })
               }
             })
+            console.log(userInfo, 999)
             wx.setStorageSync('userInfo', userInfo)
           }
         })
       },
       fail: function (err) {
-        that.applyNotice()
+        // that.applyNotice()
+        wx.showModal({
+          title: '警告',
+          content: '您点击了拒绝授权,将无法正常显示个人信息,点击确定重新获取授权。',
+          success: function (res) {
+            if (res.confirm) {
+              wx.openSetting({
+                success: (res) => {
+                  if (res.authSetting["scope.userInfo"]) {////如果用户重新同意了授权登录
+                    wx.getUserInfo({
+                      success: function (res) {
+                        var userInfo = res.userInfo;
+                        console.log(userInfo)
+                        // that.setData({
+                        //   nickName: userInfo.nickName,
+                        //   avatarUrl: userInfo.avatarUrl,
+                        // })
+                      }
+                    })
+                  }
+                }, fail: function (res) {
+
+                }
+              })
+
+            }
+          }
+        })
+        
       }
     })
   },
@@ -87,7 +116,7 @@ App({
             wx.openSetting({
               success: (res) => {
                 if(res.authSetting["scope.userInfo"]){
-                  that.getUserInfo()
+                  // that.getUserInfo()
                 }
               }
             })
