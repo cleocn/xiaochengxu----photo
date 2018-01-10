@@ -144,3 +144,10 @@ radio-group,checkbox-group{
   position:fixed;
   width:100%;
 }
+
+
+image{
+  display: block;
+  overflow: hidden;
+  vertical-align: bottom;
+}

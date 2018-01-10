@@ -4,7 +4,7 @@
   <view class="swiper-view" wx:if="{{activeIndex == 1}}">
     <audio src="{{bgmusic}}" id="myAudio" bindplay="play" bindpause="pause" loop></audio>
     <swiper indicator-dots vertical duration="1000" indicator-color="#fff" indicator-active-color="rgb(128, 243, 247)" current="{{current}}" bindchange="change">
-      <template is="swiperview" data="{{swiper}}" />
+      <template is="swiperview" data="{{swiper,audioState}}" />
     </swiper>
   </view>
   <view class="list-item active" wx:if="{{activeIndex == 2}}">

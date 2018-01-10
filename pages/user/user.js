@@ -2,6 +2,7 @@
 const app = getApp()
 
 import UserService from '../../service/user-service.js';
+import IndexService from '../../service/index-service.js';
 var AV = require('../../utils/av-weapp-min.js');
 
 Page({
@@ -40,23 +41,23 @@ Page({
       content: '确认删除吗？',
       success: function(res){
         if(res.confirm){
-          UserService.delUserPhoto(id);
-          // wx.navigateTo({
-          //   url: '/pages/user/user',
-          // })
-          _this._loadTpl();
+          UserService.delUserPhoto(id).then(function (res) {
+            _this._loadTpl();
+          })
         }
       }
     })
   },
   edit: function (e) {
     var id = e.currentTarget.dataset.id;
+    this._loadMusic(id)
     wx.navigateTo({
       url: '/pages/edit/edit?id=' + id,
     })
   },
   open: function (e) {
     var id = e.currentTarget.dataset.id;
+    this._loadMusic(id)
     wx.navigateTo({
       url: '/pages/index/index?id='+id,
     })
@@ -64,6 +65,18 @@ Page({
   create: function () {
     wx.navigateTo({
       url: '/pages/list/list',
+    })
+  },
+  _loadMusic: function (id) {
+    var _this = this;
+    IndexService.getBgMusic(id, res => {
+      wx.setStorage({
+        key: 'music',
+        data: {
+          bgmusic: res.bgmusic,
+          title: res.title
+        },
+      })
     })
   },
   userLogin: function (cb) {

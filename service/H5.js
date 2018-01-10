@@ -27,19 +27,28 @@ class H5 {
     if (cfg.width) component.parentStyle += "width: " + cfg.width / 2 + "px;";
     if (cfg.height) component.parentStyle += "height: " + cfg.height / 2 + "px;";
     if (cfg.center) component.parentStyle += "left:50%;margin-left:" + (cfg.width / 4 * -1) + "px;";
-    if (cfg.css){
-      for (let [key, value] of Object.entries(cfg.css)){
+    if (cfg.parentCss){
+      for (let [key, value] of Object.entries(cfg.parentCss)){
         component.parentStyle += key + ":" + value + ";";
       }
     }
     // 元素样式 -> bg
     component.style = "";
-    if (cfg.bg) component.style += "background-image:url(" + cfg.bg + ");";
-    if (cfg.bgCss) {
-      for (let [key, value] of Object.entries(cfg.bgCss)) {
+    if (cfg.bg) component.image = cfg.bg;
+    if (cfg.css) {
+      for (let [key, value] of Object.entries(cfg.css)) {
         component.style += key + ":" + value + ";";
       }
     }
+
+    //图片样式 -> img
+    component.imgStyle = "";
+    if (cfg.img) {
+      for (let [key, value] of Object.entries(cfg.img)) {
+        component.imgStyle += key + ":" + value + ";";
+      }
+    }
+
 
     // 自定义事件
     if(cfg.bindTap) component.bindTap = cfg.bindTap;

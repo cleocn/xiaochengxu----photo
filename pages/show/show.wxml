@@ -3,13 +3,28 @@
   <swiper vertical>
       <block wx:for="{{swiper}}" wx:for-item="swiperItem" wx:key>
         <swiper-item>
-            <view class="wrapper" style="background: url({{swiperItem.bg}});">
+            <!-- <view class="wrapper" style="background: url({{swiperItem.bg}});">
               <block wx:for="{{swiperItem.list}}" wx:key>
                 <view wx:if="{{item.parentStyle}}" style="{{item.parentStyle}}">
                   <view wx:if="{{item.style}}" style="{{item.style}}" bindtap="{{item.bindTap ? item.bindTap : ''}}" class="{{!audioState ? item.class : ''}}"></view>
                 </view>
               </block>
-            </view> 
+            </view>  -->
+            <view style='width: 100%;height: 100%;position: relative;'>
+              <view style="width: 100%; height: 100%; overflow: hidden; position: absolute; z-index: -1;">
+                <view style="width:100%;height:100%;background-image:url({{swiperItem.bg}})">
+                </view>
+              </view>
+              <view style='position: absolute;top: 0;text-align: left;width: 100%;height: 100%;background-repeat: no-repeat;background-size: 100% 100%;'>
+              <block wx:for="{{swiperItem.list}}" wx:key>
+                <view style="{{item.parentStyle}}">
+                  <view style="{{item.style}}">
+                    <image src="{{item.image}}" style="{{item.imgStyle}}"  mode='aspectFit'></image>
+                  </view>
+                </view>
+              </block>  
+              </view>
+            </view>
         </swiper-item>
       </block>
   </swiper>

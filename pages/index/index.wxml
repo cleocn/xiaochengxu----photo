@@ -5,13 +5,28 @@
   <swiper indicator-dots vertical autoplay circular duration="1000" indicator-color="#fff" indicator-active-color="rgb(128, 243, 247)" bindchange="change">
       <block wx:for="{{swiper}}" wx:for-item="swiperItem" wx:key>
         <swiper-item>
-            <view class="wrapper" style="background: url({{swiperItem.bg}});">
+            <!-- <view class="wrapper" style="background: url({{swiperItem.bg}});">
               <block wx:for="{{swiperItem.list}}" wx:key>
                   <view wx:if="{{item.parentStyle}}" style="{{item.parentStyle}}">
                     <view wx:if="{{item.style}}" style="{{item.style}}" bindtap="{{item.bindTap ? item.bindTap : ''}}" class="{{!audioState ? item.class : ''}}"></view>
                   </view>
               </block>
-            </view> 
+            </view>  -->
+            <view style='width: 100%;height: 100%;position: relative;'>
+              <view style="width: 100%; height: 100%; overflow: hidden; position: absolute; z-index: -1;">
+                <view style="width:100%;height:100%;background-image:url({{swiperItem.bg}})">
+                </view>
+              </view>
+              <view style='position: absolute;top: 0;text-align: left;width: 100%;height: 100%;background-repeat: no-repeat;background-size: 100% 100%;'>
+              <block wx:for="{{swiperItem.list}}" wx:key>
+                <view style="{{item.parentStyle}}" class="{{!audioState ? item.class : ''}}">
+                  <view style="{{item.style}}" bindtap="chooseImg"  data-idx="{{idx}}" data-index="{{index}}" >
+                    <image src="{{item.image}}" style="{{item.imgStyle}}"  catchtap="{{item.bindTap ? item.bindTap : ''}}" mode='aspectFit'></image>
+                  </view>
+                </view>
+              </block>  
+              </view>
+            </view>
             <view class="save" catchtap="make" wx:if="{{share}}">
               我也要制作一个
             </view>

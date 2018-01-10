@@ -25,6 +25,7 @@ Page({
       })
     }
     this._loadMusic();
+    // this._loadTpl();
     UserService.userView(this.id);
     wx.removeStorageSync('indexCurrentIndex');
   },
@@ -35,11 +36,17 @@ Page({
   },
   _loadMusic: function(){
     var _this = this;
-    IndexService.getBgMusic(this.id,res=>{
-      _this.setData({
-        bgmusic: res.bgmusic,
-        title: res.title
-      })
+    // IndexService.getBgMusic(this.id,res=>{
+    //   _this.setData({
+    //     bgmusic: res.bgmusic,
+    //     title: res.title
+    //   })
+    // })
+    wx.getStorage({
+      key: 'music',
+      success: function(res) {
+        _this.setData({...res.data})
+      }
     })
   },
   _loadTpl: function(){
@@ -47,7 +54,7 @@ Page({
     wx.showLoading({
       title: 'loading'
     })
-    IndexService.getPageData(this.id, res => {
+    IndexService.getPageData(this.id, res => {console.log(res)
       wx.hideLoading()
       _this.setData({
         swiper: res

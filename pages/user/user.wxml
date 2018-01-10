@@ -16,9 +16,9 @@
           <view><text>{{item.title ? item.title: '小琬琬音乐相册'}}</text></view>
           <view><text>浏览量：{{item.view}}</text><text>分享次数：{{item.share}}</text></view>
           <view>
-              <text class="iconfont icon-shanchu1" data-id="{{item.id}}" bindtap="del">删除</text>
-              <text class="iconfont icon-bianji" data-id="{{item.id}}" bindtap="edit">编辑</text>
-              <text class="iconfont icon-kan" data-id="{{item.id}}" bindtap="open">打开</text>
+            <text class="iconfont icon-shanchu1" data-id="{{item.id}}" bindtap="del">删除</text>
+            <text class="iconfont icon-bianji" data-id="{{item.id}}" bindtap="edit">编辑</text>
+            <text class="iconfont icon-kan" data-id="{{item.id}}" bindtap="open">打开</text>
           </view>
         </view>
       </view>

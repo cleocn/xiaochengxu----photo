@@ -17,11 +17,7 @@ class UserService{
   }
   delUserPhoto(id){
     var userPhoto = AV.Object.createWithoutData('UserPhoto', id);
-    userPhoto.destroy().then(function (res) {
-      wx.showToast({
-        title: '删除成功'
-      })
-    })
+    return userPhoto.destroy()
   }
   userView(id){
     var userPhoto = AV.Object.createWithoutData('UserPhoto', id);

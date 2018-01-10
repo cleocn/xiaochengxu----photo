@@ -33,3 +33,9 @@ swiper,swiper-item{
     top: 20%;
   }
 }
+
+image{
+  display: block;
+  overflow: hidden;
+  vertical-align: bottom;
+}

@@ -43,10 +43,17 @@ Page({
   },
   _loadMusic: function () {
     var _this = this;
-    IndexService.getBgMusic(_this.id, res => { 
-      _this.setData({
-        bgmusic: res.bgmusic
-      })
+    // IndexService.getBgMusic(this.id,res=>{
+    //   _this.setData({
+    //     bgmusic: res.bgmusic,
+    //     title: res.title
+    //   })
+    // })
+    wx.getStorage({
+      key: 'music',
+      success: function (res) {
+        _this.setData({ ...res.data })
+      }
     })
   },
   _loadTpl: function () {
@@ -138,6 +145,7 @@ Page({
       var swiper = this.data.swiper;
       var swiperData = this.data.swiperData;
       var h5 = new H5();
+      console.log(this.data.checks.length, this.data.swiper.length)
       if (this.data.checks.length){
         DetailService.getPageData(this.data.checks, res => {
           res.forEach(function (item, index) {
@@ -155,6 +163,12 @@ Page({
             swiperData
           })
         })
+      } else if (this.data.checks.length === 0 && this.data.swiper.length === 0){
+        wx.showToast({
+          title: '请选择模板',
+          image: '/asset/img/x_alt.png'
+        })
+        return;
       }
       index = 1;
     } 
@@ -178,8 +192,8 @@ Page({
     var swiperData = _this.data.swiperData;
     var idx = e.currentTarget.dataset.idx;
     var index = e.currentTarget.dataset.index;
-    var reg = new RegExp(/url\((.*)\);/);
-    var matchs = swiper[idx].list[index].style.match(reg);
+    // var reg = new RegExp(/url\((.*)\);/);
+    // var matchs = swiper[idx].list[index].style.match(reg);
     wx.chooseImage({
       count: 1,
       sizeType: ['original', 'compressed'],
@@ -208,12 +222,15 @@ Page({
             'user': 'test'
           },
           success: function (res) {
-            swiper[idx].list[index].style = swiper[idx].list[index].style.replace(matchs[1], res.data)
-            swiperData[idx].list[index].style = swiperData[idx].list[index].style.replace(matchs[1], res.data)
+            // swiper[idx].list[index].style = swiper[idx].list[index].style.replace(matchs[1], res.data)
+            // swiperData[idx].list[index].style = swiperData[idx].list[index].style.replace(matchs[1], res.data)
+            swiper[idx].list[index].image = res.data
+            swiperData[idx].list[index].image = res.data
             _this.setData({
               swiper,
               swiperData
             })
+            _this.audioCtx.play()
           }
         })
       }
@@ -223,9 +240,17 @@ Page({
     var idx = e.currentTarget.dataset.idx;
     var swiper = this.data.swiper;
     var swiperData = this.data.swiperData;
+    var _this = this;
     swiper.splice(idx, 1);
     swiperData.splice(idx, 1);
     if (swiper.length == 0) {
+      if(this.data.mubanData.length === 0){
+        ListService.getPageData(res => {
+          _this.setData({
+            mubanData: res
+          })
+        });
+      }
       this.setData({
         activeIndex: 2,
         bgmusic: '',

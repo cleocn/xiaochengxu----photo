@@ -26,11 +26,11 @@ Page({
   onLoad: function (options) {
     wx.removeStorageSync('listCurrentIndex');
     this._loadTpl();
-    wx.showModal({
-      title: '提示',
-      content: '按选择顺序可进行排序',
-      showCancel: false
-    })
+    // wx.showModal({
+    //   title: '提示',
+    //   content: '按选择顺序可进行排序',
+    //   showCancel: false
+    // })
   },
   onShow: function(){
     var userInfo = wx.getStorageSync('userInfo');
@@ -86,7 +86,7 @@ Page({
       this.setData({
         existIndex: false
       })
-    }
+    } 
     if (preIndex == '') {
       for (let [key, value] of Object.entries(swiper[0].list)) {
         value.style = value.style.replace(value.animateInName, value.animateOut)
@@ -99,6 +99,7 @@ Page({
     for (let [key, value] of Object.entries(swiper[currentIndex].list)) {
       if (!this.data.changeIndex && this.data.existIndex) {
         value.style += value.animateIn;
+        continue;
       }
       value.style = value.style.replace(value.animateOut, value.animateInName)
     }
@@ -145,14 +146,19 @@ Page({
             "width": 60,
             "height": 60,
             "bg": "http://ac-uslk0bln.clouddn.com/b983124457ea85aef86a.svg",
-            "css": {
+            "parentCss": {
               "right": "20px",
               "top": "20px",
+              "position": "absolute",
               "z-index": 99999
             },
-            "bgCss": {
+            "css": {
               "width": "100%",
               "height": "100%"
+            },
+            "img": {
+              "width": "30px",
+              "height": "30px"
             },
             "class": "audio_music",
             "id": "music",
@@ -174,6 +180,7 @@ Page({
           _this.setData({
             swiper: swiperData,
             changeIndex: false,
+            indexArr: [],
             swiperData
           })
         })
@@ -205,8 +212,9 @@ Page({
     var swiperData = _this.data.swiperData;
     var idx = e.currentTarget.dataset.idx;
     var index = e.currentTarget.dataset.index;
-    var reg = new RegExp(/url\((.*)\);/);
-    var matchs = swiper[idx].list[index].style.match(reg);
+    // var reg = new RegExp(/url\((.*)\);/);
+    // var matchs = swiper[idx].list[index].style.match(reg);
+    // console.log(idx, index, matchs)
     wx.chooseImage({
       count: 1,
       sizeType: ['original', 'compressed'],
@@ -236,12 +244,15 @@ Page({
             'user': 'test'
           },
           success: function (res) {
-            swiper[idx].list[index].style = swiper[idx].list[index].style.replace(matchs[1], res.data)
-            swiperData[idx].list[index].style = swiperData[idx].list[index].style.replace(matchs[1], res.data)
+            // swiper[idx].list[index].style = swiper[idx].list[index].style.replace(matchs[1], res.data)
+            // swiperData[idx].list[index].style = swiperData[idx].list[index].style.replace(matchs[1], res.data)
+            swiper[idx].list[index].image = res.data
+            swiperData[idx].list[index].image = res.data
             _this.setData({
               swiper,
               swiperData
             })
+            _this.audioCtx.play();
           }
         })
       }
@@ -282,11 +293,11 @@ Page({
     var _this = this;
     var swiper = _this.data.swiper;
     var swiperData = _this.data.swiperData;
-    var reg = new RegExp(/url\((.*)\);/);
-    var matchs = swiperData[0].list[1] ? swiperData[0].list[1].style.match(reg) : swiperData[0].list[0].style.match(reg);
+    // var reg = new RegExp(/url\((.*)\);/);
+    // var matchs = swiperData[0].list[1] ? swiperData[0].list[1].style.match(reg) : swiperData[0].list[0].style.match(reg);
     var userPhoto = new AV.Object('UserPhoto');
     userPhoto.set('userid', wx.getStorageSync('userid'));
-    userPhoto.set('thumb', matchs[1]);
+    userPhoto.set('thumb', swiperData[0].list[1].image);
     userPhoto.set('bgmusic', _this.data.bgmusic);
     userPhoto.set('title',_this.data.title);
     var userPhotos = [];
